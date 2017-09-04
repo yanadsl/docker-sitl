@@ -23,7 +23,7 @@ RUN git clone git://github.com/ArduPilot/ardupilot.git && \
     cd ardupilot \
     && git submodule update --init --recursive \
     && cd ArduCopter \
-    && timeout 240 sim_vehicle.py -w
+    && timeout 1200 sim_vehicle.py -w
 
 WORKDIR /ardupilot/ArduCopter
 
