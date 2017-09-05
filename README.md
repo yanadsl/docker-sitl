@@ -5,23 +5,24 @@ However, **JSBSim is not included** in this image
 
 If you want to build yourself, check `Dockerfile` in Line 24
 
-`timeout 240 sim_vehicle.py -w`
+`timeout 1200 sim_vehicle.py -w`
 
-I'm using `timeout 240` to let the program run for 240s and kill itself
+I'm using `timeout 1200` to let the program run for 1200s and kill itself
 
-It's because the program need to run once first, and the time depend on your computer.
+It's because the program need to run once first for building and settings, and the time depend on your computer.
 
 # Usage
 ```
-docker run -itd --name SITL -p 5762:5762 yanadsl:docker-sitl\
--l 25.0340999,121.563394,15,165 -C --out 192.168.62.1:14550
+docker pull yanadsl/docker-sitl
+docker run -itd --name SITL -p 5762:5762 yanadsl/docker-sitl \
+-l 25.0340999,121.563394,15,165 --out 192.168.62.1:14550
 ```
-arg `-l` for location, you can dismiss it or change yourself. Add other args if you need them, check `sim_vehicle.py` for more.
 
-**Args for `sim_vehicle.py` must be add before `-C`**
+`-l` for location, you can dismiss it or change it.
 
+`--out` is for the client computer's(where you install mission planner) IP address and the port you want to use, add multiple(--out A --out B) if you need more
 
+If you want to deal with MAVproxy args, add `-m` before it 
 
-**args after `-C` are for Mvaproxy**, you can check the args [here](http://ardupilot.github.io/MAVProxy/html/getting_started/starting.html)
-
-arg `--out` is for the client computer's(where you install mission planner) IP address and the port you want to use, add multiple if you need more
+For args, looking at **[sim_vehicle](https://github.com/ArduPilot/ardupilot/blob/master/Tools/autotest/sim_vehicle.py)** and [**Mvaproxy**](http://ardupilot.github.io/MAVProxy/html/getting_started/starting.html) 
+ should give you more information
